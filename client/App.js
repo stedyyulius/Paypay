@@ -25,12 +25,11 @@ import Home from './src/components/Home'
 import Login from './src/components/Login'
 import Payment from './src/components/Payment'
 import TransactionHistory from './src/components/TransactionHistory'
+import Balance from './src/components/Balance'
 
 const Content = StackNavigator({
   Home: { screen: Home},
-  Login: { screen: Login},
   Payment: {screen: Payment},
-  TransactionHistory: {screen: TransactionHistory}
 });
 
 const deviceW = Dimensions.get('window').width
@@ -67,6 +66,14 @@ export default class App extends Component{
               renderSelectedIcon={() => <Icon name="history" size={px2dp(22)} color="#3496f0"/>}
               onPress={() => this.setState({ selectedTab: 'transaction' })}>
               <TransactionHistory />
+            </TabNavigator.Item>
+            <TabNavigator.Item
+              selected={this.state.selectedTab === 'Balance'}
+              title="Balance"
+              renderIcon={() => <Icon name="usd" size={px2dp(22)} color="#666"/>}
+              renderSelectedIcon={() => <Icon name="usd" size={px2dp(22)} color="#3496f0"/>}
+              onPress={() => this.setState({ selectedTab: 'Balance' })}>
+              <Balance />
             </TabNavigator.Item>
           </TabNavigator>
     );
