@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
@@ -10,17 +5,35 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  TextInput,
+  Button
 } from 'react-native';
 
+import Home from './Home'
 
-export default class App extends Component<{}> {
+export default class Login extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      username: ''
+    }
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
         <Text>
           Login
         </Text>
+        <TextInput
+         style={{height: 50, borderColor: 'gray', borderWidth: 1,width: 100}}
+         onChangeText={(e) => this.setState({username: e})}
+         value={this.state.username}
+       />
+        <Button
+        title="Login"/>
       </View>
     );
   }

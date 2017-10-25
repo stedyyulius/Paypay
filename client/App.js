@@ -6,6 +6,9 @@
 
 import React, { Component } from 'react';
 import TabNavigator from 'react-native-tab-navigator';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { Dimensions } from 'react-native'
+
 import {
   Platform,
   StyleSheet,
@@ -21,13 +24,22 @@ import {
 import Home from './src/components/Home'
 import Login from './src/components/Login'
 import Payment from './src/components/Payment'
+import TransactionHistory from './src/components/TransactionHistory'
 
 const Content = StackNavigator({
   Home: { screen: Home},
   Login: { screen: Login},
-  Payment: {screen: Payment}
+  Payment: {screen: Payment},
+  TransactionHistory: {screen: TransactionHistory}
 });
 
+const deviceW = Dimensions.get('window').width
+
+const basePx = 375
+
+function px2dp(px) {
+  return px *  deviceW / basePx
+}
 
 export default class App extends Component{
   constructor(props){
@@ -38,25 +50,25 @@ export default class App extends Component{
   }
   render() {
     return (
-      <TabNavigator>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'home'}
-          title="Home"
-          renderIcon={() => <Image source={{uri:'https://images.vexels.com/media/users/3/143188/isolated/preview/5f44f3160a09b51b4fa4634ecdff62dd-money-icon-by-vexels.png'}} />}
-          renderSelectedIcon={() => <Image source={{uri:'https://images.vexels.com/media/users/3/143188/isolated/preview/5f44f3160a09b51b4fa4634ecdff62dd-money-icon-by-vexels.png'}} />}
-          badgeText="1"
-          onPress={() => this.setState({ selectedTab: 'home' })}>
-          <Content />
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'transaction'}
-          title="Profile"
-          renderIcon={() => <Image source={{uri:'http://www.freeiconspng.com/uploads/legal-information-8.png'}} />}
-          renderSelectedIcon={() => <Image source={{uri:'http://www.freeiconspng.com/uploads/legal-information-8.png'}} />}
-          onPress={() => this.setState({ selectedTab: 'transaction' })}>
-          <Login />
-        </TabNavigator.Item>
-      </TabNavigator>
+         <TabNavigator>
+            <TabNavigator.Item
+              selected={this.state.selectedTab === 'home'}
+              title="Home"
+              renderIcon={() => <Icon name="home" size={px2dp(22)} color="#666"/>}
+              renderSelectedIcon={() => <Icon name="home" size={px2dp(22)} color="#3496f0"/>}
+              // badgeText="1"
+              onPress={() => this.setState({ selectedTab: 'home' })}>
+              <Content />
+            </TabNavigator.Item>
+            <TabNavigator.Item
+              selected={this.state.selectedTab === 'transaction'}
+              title="Transaction History"
+              renderIcon={() => <Icon name="history" size={px2dp(22)} color="#666"/>}
+              renderSelectedIcon={() => <Icon name="history" size={px2dp(22)} color="#3496f0"/>}
+              onPress={() => this.setState({ selectedTab: 'transaction' })}>
+              <TransactionHistory />
+            </TabNavigator.Item>
+          </TabNavigator>
     );
   }
 }

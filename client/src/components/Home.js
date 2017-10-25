@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 
-export default class App extends Component<{}> {
+export default class Home extends Component{
   static navigationOptions = ({ navigation }) => ({
     title: `Paypay`,
     headerTitleStyle: {
